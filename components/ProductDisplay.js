@@ -4,15 +4,8 @@ app.component('product-display', {
           type: Boolean,
           required: true,
         },
-        stock: {
-            type: Number,
-            required: true
-        },
-        stockEmpty: {
-            type: Boolean,
-            required: true
-        }
       },
+    emits: ['add-to-cart', 'remove-to-cart'],
     template:
     /*html*/
     `
@@ -46,13 +39,25 @@ app.component('product-display', {
         <p>Quantité: {{ paquet.quantity }}</p>
         <p>Prix: {{paquet.price}}</p>
       </div>
+      <button @click="addToCart" :style="styles.roundButton" :disabled="stockEmpty" :class="{ disabledButton: stockEmpty }">Ajouter au panier</button>
+      <button @click="removeToCart" :style="styles.roundButton">Retirer du panier</button>
     `,
     data() {
       return {
         description: "C'est pour acheter du café du coup",
         selectedImage: 0,
+        stock: 1,
         inStock: true,
         onSale: false,
+        styles: {
+            roundButton: {
+                borderRadius: '20px',
+                padding: '10px',
+                backgroundColor: 'rgb(0, 114, 180)',
+                color: 'white',
+                cursor: 'pointer'
+                }
+        },
         details: [
             {
             id: 1,
@@ -109,7 +114,13 @@ app.component('product-display', {
     methods: {
         updateImage: function(index) {
             this.selectedImage = index
-            }
+            },
+        addToCart: function() {
+            this.$emit('add-to-cart', this.carouselImages[this.selectedImage].id);
+            },
+        removeToCart: function() {
+            this.$emit('remove-to-cart', this.carouselImages[this.selectedImage].id);
+        },
     },
     computed: {
         image() {
@@ -121,6 +132,9 @@ app.component('product-display', {
             }
           
             return 2.99
-          }
+          },
+        stockEmpty() {
+            return this.stock <= 0
+        }
     }
 });

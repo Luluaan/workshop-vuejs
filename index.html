@@ -23,11 +23,9 @@
       <!--Point d'entrée de l'app Vue-->
       <h1 style="color: green"><a :href="link">{{title}}</a></h1>
 
-      <product-display :premium="premium" :stock="stock" :stock-empty="stockEmpty"></product-display>
+      <product-display :premium="premium" @add-to-cart="addCart" @remove-to-cart="removeCart"></product-display>
 
-      <button @click="addToCart" :style="styles.roundButton" :disabled="stockEmpty" :class="{ disabledButton: stockEmpty }">Ajouter au panier</button>
-      <button @click="removeToCart" :style="styles.roundButton">Retirer du panier</button>
-      <div :class="[cart > 0 ? 'cartFilled' : '']">Panier({{ cart }})</div>
+      <div :class="[cart.length > 0 ? 'cartFilled' : '']">Panier({{ cart.length }})</div>
     </div>
       
       <!--Bootstrap-->
