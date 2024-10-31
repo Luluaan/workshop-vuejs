@@ -1,12 +1,13 @@
 const app = Vue.createApp({
     data: function () {
       return {
-        title: 'Achat de café Nespresso',
+        action:  'Achat de café',
+        brand:  'Nespresso',
         description: "C'est pour acheter du café du coup",
-        image: 'assets/images/colombia.png',
+        selectedImage: 0,
         link: 'https://questionmarc.k8s.ing.he-arc.ch/',
         inStock: true,
-        stock: 0,
+        stock: 1,
         onSale: false,
         details: [
             {
@@ -79,8 +80,19 @@ const app = Vue.createApp({
             if (this.cart > 0)
             this.cart -= 1;
         },
-        updateImage: function(path) {
-        this.image = path
+        updateImage: function(index) {
+        this.selectedImage = index
         }
-    }
+    },
+    computed: {
+        title() {
+            return this.action + ' ' + this.brand
+        },
+        image() {
+            return this.carouselImages[this.selectedImage].image
+        },
+        stockEmpty() {
+            return this.stock <= 0
+        }
+      },
   });

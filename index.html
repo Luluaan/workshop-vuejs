@@ -23,7 +23,7 @@
       <!--Point d'entrée de l'app Vue-->
       <h1 style="color: green"><a :href="link">{{title}}</a></h1>
       <p>{{description}}</p>
-      <img height="200" :src="image" :class="{imageOpaque: stock <= 0}" />
+      <img height="200" :src="image" :class="{imageOpaque: stockEmpty}" />
       <p v-if="inStock">Disponible</p>
       <p v-else>Plus de stock</p>
       
@@ -45,9 +45,9 @@
 
       <div>
         <span
-          v-for="carouselImage in carouselImages"
+          v-for="(carouselImage, index) in carouselImages"
           :key="carouselImage.id"
-          @mouseover="updateImage(carouselImage.image)"
+          @mouseover="updateImage(index)"
         >
           <img height="50" alt="carouselImage.text" :src="carouselImage.image" />
           {{ carouselImage.text }}
@@ -59,7 +59,7 @@
         <p>Prix: {{paquet.price}}</p>
       </div>
 
-      <button @click="addToCart" :style="styles.roundButton" :disabled="stock <= 0" :class="{ disabledButton: stock <= 0 }">Ajouter au panier</button>
+      <button @click="addToCart" :style="styles.roundButton" :disabled="stockEmpty" :class="{ disabledButton: stockEmpty }">Ajouter au panier</button>
       <button @click="removeToCart" :style="styles.roundButton">Retirer du panier</button>
       <div :class="[cart > 0 ? 'cartFilled' : '']">Panier({{ cart }})</div>
       
