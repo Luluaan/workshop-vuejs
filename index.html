@@ -37,14 +37,25 @@
         <li v-for="detail in details">{{ detail }}</li>
       </ul>
 
-      <div v-for="carouselImage in carouselImages" :key="carouselImage.id">
-        {{ carouselImage.text }}
+      <div>
+        <span
+          v-for="carouselImage in carouselImages"
+          :key="carouselImage.id"
+          @mouseover="updateImage(carouselImage.image)"
+        >
+          <img height="50" alt="carouselImage.text" :src="carouselImage.image" />
+          {{ carouselImage.text }}
+        </span>
       </div>
 
       <div v-for="paquet in paquets" :key="paquet.id">
         <p>Quantité: {{ paquet.quantity }}</p>
         <p>Prix: {{paquet.price}}</p>
       </div>
+
+      <button @click="addToCart">Ajouter au panier</button>
+      <button @click="removeToCart">Retirer du panier</button>
+      <div>Panier({{ cart }})</div>
       
       <!--Bootstrap-->
       <script

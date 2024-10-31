@@ -11,21 +11,25 @@ const app = Vue.createApp({
         details: ['Doux', 'Harmonieux'],
         carouselImages: [
             {
-              id: 1,
-              text: 'Capsule 1',
-            },
-            {
-              id: 2,
-              text: 'Capsule 2',
-            },
-            {
-              id: 3,
-              text: 'Tasse',
-            },
-            {
-              id: 4,
-              text: 'Paquet',
-            }
+                id: 1,
+                text: 'Capsule 1',
+                image: './assets/images/colombia.png',
+              },
+              {
+                id:  2,
+                text: 'Capsule 2',
+                image: './assets/images/colombia_de_cote.png',
+              },
+              {
+                id: 3,
+                text: 'Tasse',
+                image: './assets/images/colombia_tasse.png',
+              },
+              {
+                id: 4,
+                text: 'Paquet',
+                image: './assets/images/colombia_paquet.png',
+              }
           ],
           paquets: [
             {
@@ -44,6 +48,19 @@ const app = Vue.createApp({
               price: 3
             }
           ],
+          cart: 0,
       };
     },
+    methods: {
+        addToCart: function() {
+            this.cart += 1;
+          },
+          removeToCart: function() {
+            if (this.cart > 0)
+                this.cart -= 1;
+          },
+          updateImage: function(path) {
+            this.image = path
+          }
+    }
   });
