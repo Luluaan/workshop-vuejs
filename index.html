@@ -22,46 +22,13 @@
     <div id="app">
       <!--Point d'entrée de l'app Vue-->
       <h1 style="color: green"><a :href="link">{{title}}</a></h1>
-      <p>{{description}}</p>
-      <img height="200" :src="image" :class="{imageOpaque: stockEmpty}" />
-      <p v-if="inStock">Disponible</p>
-      <p v-else>Plus de stock</p>
-      
-      <p v-if="stock > 10">Disponible</p>
-      <p v-else-if="stock <= 10 && stock > 0">Peu de stock</p>
-      <p v-else>Plus de stock</p>
 
-      <p v-show="onSale">En vente</p>
-
-      <ul>
-        <li
-          v-for="detail in details"
-          :key="detail.id"
-          :style="{ color: detail.color }"
-        >
-          {{ detail.text }}
-        </li>
-      </ul>
-
-      <div>
-        <span
-          v-for="(carouselImage, index) in carouselImages"
-          :key="carouselImage.id"
-          @mouseover="updateImage(index)"
-        >
-          <img height="50" alt="carouselImage.text" :src="carouselImage.image" />
-          {{ carouselImage.text }}
-        </span>
-      </div>
-
-      <div v-for="paquet in paquets" :key="paquet.id">
-        <p>Quantité: {{ paquet.quantity }}</p>
-        <p>Prix: {{paquet.price}}</p>
-      </div>
+      <product-display :premium="premium" :stock="stock" :stock-empty="stockEmpty"></product-display>
 
       <button @click="addToCart" :style="styles.roundButton" :disabled="stockEmpty" :class="{ disabledButton: stockEmpty }">Ajouter au panier</button>
       <button @click="removeToCart" :style="styles.roundButton">Retirer du panier</button>
       <div :class="[cart > 0 ? 'cartFilled' : '']">Panier({{ cart }})</div>
+    </div>
       
       <!--Bootstrap-->
       <script
@@ -77,9 +44,10 @@
       
       <!--Notre JS contenant notre app Vue-->
       <script src="./main.js"></script>
+      <script src="./components/ProductDisplay.js"></script>
+      <script src="./components/ProductDetails.js"></script>
       <script>
         const mountedApp = app.mount('#app');
         </script>
-        </div>
   </body>
 </html>
