@@ -6,9 +6,20 @@ const app = Vue.createApp({
         image: 'assets/images/colombia.png',
         link: 'https://questionmarc.k8s.ing.he-arc.ch/',
         inStock: true,
-        stock: 5,
+        stock: 0,
         onSale: false,
-        details: ['Doux', 'Harmonieux'],
+        details: [
+            {
+            id: 1,
+            text: 'Doux',
+            color: '#6C99C6'
+            },
+            {
+            id: 2,
+            text: 'Harmonieux',
+            color: '#BF9E74'
+            }
+        ],
         carouselImages: [
             {
                 id: 1,
@@ -49,18 +60,27 @@ const app = Vue.createApp({
             }
           ],
           cart: 0,
+          styles: {
+            roundButton: {
+              borderRadius: '20px',
+              padding: '10px',
+              backgroundColor: 'rgb(0, 114, 180)',
+              color: 'white',
+              cursor: 'pointer'
+            }
+          },
       };
     },
     methods: {
         addToCart: function() {
             this.cart += 1;
           },
-          removeToCart: function() {
+        removeToCart: function() {
             if (this.cart > 0)
-                this.cart -= 1;
-          },
-          updateImage: function(path) {
-            this.image = path
-          }
+            this.cart -= 1;
+        },
+        updateImage: function(path) {
+        this.image = path
+        }
     }
   });

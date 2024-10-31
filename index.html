@@ -23,7 +23,7 @@
       <!--Point d'entrée de l'app Vue-->
       <h1 style="color: green"><a :href="link">{{title}}</a></h1>
       <p>{{description}}</p>
-      <img height="200" :src="image" />
+      <img height="200" :src="image" :class="{imageOpaque: stock <= 0}" />
       <p v-if="inStock">Disponible</p>
       <p v-else>Plus de stock</p>
       
@@ -34,7 +34,13 @@
       <p v-show="onSale">En vente</p>
 
       <ul>
-        <li v-for="detail in details">{{ detail }}</li>
+        <li
+          v-for="detail in details"
+          :key="detail.id"
+          :style="{ color: detail.color }"
+        >
+          {{ detail.text }}
+        </li>
       </ul>
 
       <div>
@@ -53,9 +59,9 @@
         <p>Prix: {{paquet.price}}</p>
       </div>
 
-      <button @click="addToCart">Ajouter au panier</button>
-      <button @click="removeToCart">Retirer du panier</button>
-      <div>Panier({{ cart }})</div>
+      <button @click="addToCart" :style="styles.roundButton" :disabled="stock <= 0" :class="{ disabledButton: stock <= 0 }">Ajouter au panier</button>
+      <button @click="removeToCart" :style="styles.roundButton">Retirer du panier</button>
+      <div :class="[cart > 0 ? 'cartFilled' : '']">Panier({{ cart }})</div>
       
       <!--Bootstrap-->
       <script
