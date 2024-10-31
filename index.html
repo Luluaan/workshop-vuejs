@@ -24,8 +24,14 @@
       <h1 style="color: green"><a :href="link">{{title}}</a></h1>
       <p>{{description}}</p>
       <img height="200" :src="image" />
-
+      <p v-if="inStock">Disponible</p>
+      <p v-else>Plus de stock</p>
       
+      <p v-if="stock > 10">Disponible</p>
+      <p v-else-if="stock <= 10 && stock > 0">Peu de stock</p>
+      <p v-else>Plus de stock</p>
+
+      <p v-show="onSale">En vente</p>
       
       <!--Bootstrap-->
       <script
