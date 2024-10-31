@@ -32,6 +32,19 @@
       <p v-else>Plus de stock</p>
 
       <p v-show="onSale">En vente</p>
+
+      <ul>
+        <li v-for="detail in details">{{ detail }}</li>
+      </ul>
+
+      <div v-for="carouselImage in carouselImages" :key="carouselImage.id">
+        {{ carouselImage.text }}
+      </div>
+
+      <div v-for="paquet in paquets" :key="paquet.id">
+        <p>Quantité: {{ paquet.quantity }}</p>
+        <p>Prix: {{paquet.price}}</p>
+      </div>
       
       <!--Bootstrap-->
       <script
