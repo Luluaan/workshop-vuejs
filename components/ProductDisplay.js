@@ -10,7 +10,7 @@ app.component('product-display', {
     /*html*/
     `
     <p>{{description}}</p>
-      <img height="200" :src="image" :class="{imageOpaque: stockEmpty}" />
+      <img height="200" :src="image" :class="{imageOpaque: stockEmpty}" style="width: 300px" />
       <p v-if="inStock">Disponible</p>
       <p v-else>Plus de stock</p>
       
