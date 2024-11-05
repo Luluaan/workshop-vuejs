@@ -41,6 +41,14 @@ app.component('product-display', {
       </div>
       <button @click="addToCart" :style="styles.roundButton" :disabled="stockEmpty" :class="{ disabledButton: stockEmpty }">Ajouter au panier</button>
       <button @click="removeToCart" :style="styles.roundButton">Retirer du panier</button>
+
+      <div class="col-6 offset-3">
+        <review-form @review-submitted="addReview"></review-form>
+      </div>
+
+      <div class="col-6">
+        <review-list v-if="this.reviews.length > 0" :reviews="this.reviews"></review-list>
+      </div>
     `,
     data() {
       return {
@@ -109,6 +117,7 @@ app.component('product-display', {
               price: 3
             }
           ],
+          reviews: [],
       }
     },
     methods: {
@@ -120,6 +129,9 @@ app.component('product-display', {
             },
         removeToCart: function() {
             this.$emit('remove-to-cart', this.carouselImages[this.selectedImage].id);
+        },
+        addReview(review) {
+          this.reviews.push(review)
         },
     },
     computed: {

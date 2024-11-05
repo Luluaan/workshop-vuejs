@@ -20,12 +20,14 @@
   </head>
   <body>
     <div id="app">
+      <div class="container">
+        <div class="row">
+          <h1 style="color: green" class="col-8"><a :href="link">{{title}}</a></h1>
+          <product-display class="col-12" :premium="premium" @add-to-cart="addCart" @remove-to-cart="removeCart"></product-display>
+          <div :class="[cart.length > 0 ? 'cartFilled' : '']" class="col-4">Panier({{ cart.length }})</div>
+        </div>
+      </div>
       <!--Point d'entrée de l'app Vue-->
-      <h1 style="color: green"><a :href="link">{{title}}</a></h1>
-
-      <product-display :premium="premium" @add-to-cart="addCart" @remove-to-cart="removeCart"></product-display>
-
-      <div :class="[cart.length > 0 ? 'cartFilled' : '']">Panier({{ cart.length }})</div>
     </div>
       
       <!--Bootstrap-->
@@ -44,6 +46,8 @@
       <script src="./main.js"></script>
       <script src="./components/ProductDisplay.js"></script>
       <script src="./components/ProductDetails.js"></script>
+      <script src="./components/ReviewForm.js"></script>
+      <script src="./components/ReviewList.js"></script>
       <script>
         const mountedApp = app.mount('#app');
         </script>
